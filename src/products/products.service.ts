@@ -156,4 +156,14 @@ export class ProductsService {
 
     throw new InternalServerErrorException('Internal server error');
   }
+
+  async deleteAllProducts() {
+    const query = this.productImageRepository.createQueryBuilder('product');
+
+    try {
+      return await query.delete().where({}).execute();
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
+  }
 }
